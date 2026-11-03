@@ -11,6 +11,7 @@
   --ink: #333333;
   --orange: #b84d26;
   --pill: linear-gradient(90deg, #ff6b6b, #ff8787);
+  --field: #ffffff;
 }
 
 body.dark {
@@ -18,32 +19,50 @@ body.dark {
   --paper: linear-gradient(135deg, #2a2a3a 0%, #3a2a35 100%);
   --ink: #f0f0f0;
   --orange: #ffb38a;
+  --field: #1f1f2b;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
   min-height: 100vh;
   background: var(--back);
-  background-attachment: fixed;
+  background-attachment: scroll;
   color: var(--ink);
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 a {
   color: var(--orange);
   font-weight: bold;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ---------- Header ---------- */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,22 +84,44 @@ nav {
   gap: 20px;
 }
 
-button {
+.menu-btn {
+  display: none;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* ---------- Buttons ---------- */
+button,
+.btn {
+  display: inline-block;
   padding: 8px 14px;
   border: none;
   border-radius: 20px;
   background: var(--pill);
   color: white;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-button:hover {
+.btn {
+  margin-top: 15px;
+  padding: 12px 24px;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+button:hover,
+.btn:hover {
   opacity: 0.85;
 }
 
-.aboutme,
+/* ---------- Shared sections ---------- */
+.hero,
+.card-section,
 footer {
   max-width: 900px;
   width: calc(100% - 40px);
@@ -92,13 +133,20 @@ footer {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.aboutme {
+.card-section h2 {
+  margin-bottom: 10px;
+  color: var(--orange);
+}
+
+/* ---------- Hero ---------- */
+.hero {
   display: flex;
   align-items: center;
   gap: 40px;
 }
 
-.aboutme img {
+.hero img {
+  flex-shrink: 0;
   width: 220px;
   height: 220px;
   object-fit: cover;
@@ -106,23 +154,25 @@ footer {
   border-radius: 50%;
 }
 
-.aboutme h1 {
-  margin-bottom: 5px;
+.hero h1 {
+  margin-bottom: 8px;
 }
 
-.aboutme strong {
+.tagline {
+  font-size: 1.1rem;
   color: var(--orange);
-  font-style: italic;
+  font-weight: bold;
 }
 
-#projects {
+/* ---------- Services / Projects grid ---------- */
+.grid-section {
   max-width: 900px;
   width: calc(100% - 40px);
   margin: 0 auto;
   padding: 20px 0;
 }
 
-#projects h2 {
+.grid-section h2 {
   margin-bottom: 20px;
   color: white;
   text-align: center;
@@ -131,8 +181,12 @@ footer {
 
 .works {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+
+.works.two {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .work {
@@ -141,6 +195,7 @@ footer {
   border: 3px solid var(--gold);
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
 }
 
 .work:hover {
@@ -152,29 +207,125 @@ footer {
   color: var(--orange);
 }
 
-footer {
-  text-align: center;
+/* ---------- Contact ---------- */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 10px;
 }
 
-footer h2 {
+.contact-info p {
   margin-bottom: 10px;
 }
 
-footer p {
-  margin: 6px 0;
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-@media (max-width: 600px) {
+.contact-form label {
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  background: var(--field);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form button {
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+footer p {
+  margin: 4px 0;
+}
+
+/* ---------- Tablet (768px and below) ---------- */
+@media (max-width: 768px) {
   header {
-    justify-content: center;
+    padding: 12px 20px;
   }
 
-  .aboutme {
+  .hero {
+    gap: 25px;
+    padding: 25px;
+  }
+
+  .hero img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .works {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Mobile (600px and below) ---------- */
+@media (max-width: 600px) {
+  .menu-btn {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+    padding-top: 10px;
+    text-align: center;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  .hero {
     flex-direction: column;
     text-align: center;
   }
 
-  .works {
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .works,
+  .works.two {
     grid-template-columns: 1fr;
+  }
+
+  .card-section,
+  footer {
+    padding: 20px;
+  }
+
+  .contact-form button {
+    align-self: stretch;
   }
 }

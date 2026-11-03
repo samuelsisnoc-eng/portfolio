@@ -9,10 +9,15 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
-    <a href="#about" class="myname">Samuel C. Sisno</a>
-    <nav>
+    <a href="#home" class="myname">Samuel C. Sisno</a>
+
+    <button id="menuBtn" class="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">&#9776;</button>
+
+    <nav id="mainNav">
       <a href="#about">About</a>
+      <a href="#services">Services</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
       <button id="darkBot">Dark Mode</button>
@@ -20,22 +25,49 @@
   </header>
 
   <main>
-    <section id="about" class="aboutme">
-      <img src="sam.jpg" alt="Photo of Samuel C. Sisno">
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <img src="images/sam.jpg" alt="Photo of Samuel C. Sisno">
       <div>
         <h1>Wassap, I'm Samuel Sisno</h1>
-        <p><strong>BS Information Technology Student</strong></p>
-        <p>
-          I study Information Technology at Bulacan State University, majoring in
-          Web and Mobile Application Development. I'm currently learning Dart and
-          React to level up my web and mobile skills.
-        </p>
+        <p class="tagline">BS Information Technology student building web and mobile apps.</p>
+        <a href="#projects" class="btn">View My Projects</a>
       </div>
     </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
+    <!-- ABOUT -->
+    <section id="about" class="card-section">
+      <h2>About Me</h2>
+      <p>
+        I study Information Technology at Bulacan State University, majoring in
+        Web and Mobile Application Development. I'm currently learning Dart and
+        React to level up my web and mobile skills.
+      </p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="grid-section">
+      <h2>What I Do</h2>
       <div class="works">
+        <article class="work">
+          <h3>Web Development</h3>
+          <p>Database-driven websites and systems built with PHP and MySQL.</p>
+        </article>
+        <article class="work">
+          <h3>Mobile App Development</h3>
+          <p>Learning to build mobile apps with Dart as part of my major.</p>
+        </article>
+        <article class="work">
+          <h3>Front-End with React</h3>
+          <p>Learning React to build interactive, responsive user interfaces.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="grid-section">
+      <h2>Projects</h2>
+      <div class="works two">
         <article class="work">
           <h3>Online Enrollment System</h3>
           <p>
@@ -54,13 +86,37 @@
         </article>
       </div>
     </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card-section">
+      <h2>Contact</h2>
+      <div class="contact-wrap">
+        <div class="contact-info">
+          <p><strong>Email:</strong> <a href="mailto:samuelsisno.c@gmail.com">samuelsisno.c@gmail.com</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/samuelsisnoc-eng">github.com/samuelsisnoc-eng</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+639687029226">09687029226</a></p>
+        </div>
+
+        <form class="contact-form" action="mailto:samuelsisno.c@gmail.com" method="post" enctype="text/plain">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
   </main>
 
-  <footer id="contact">
-    <h2>Contact</h2>
-    <p><a href="mailto:samuelsisno.c@gmail.com">samuelsisno.c@gmail.com</a></p>
-    <p><a href="https://github.com/samuelsisnoc-eng">GitHub Link</a></p>
-    <p><a href="tel:+639687029226">09687029226</a></p>
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Samuel C. Sisno. All rights reserved.</p>
+    <p><a href="#home">Back to top</a></p>
   </footer>
 
 </body>
